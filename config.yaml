@@ -1,0 +1,65 @@
+﻿# Mocha panel
+watch_config: true
+watch_stylesheet: true
+
+bars:
+  mocha_panel:
+    enabled: true
+    class_name: "mocha-panel"
+    screens: ["primary"]
+    alignment:
+      position: "top"
+    dimensions:
+      width: "100%"
+      height: 40
+    window_flags:
+      windows_app_bar: false
+      auto_hide: false
+      hide_on_maximized: true
+    widgets:
+      left: ["audio", "battery"]
+      center: ["clock"]
+      right: ["power"]
+
+widgets:
+  audio:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "Ääni: {level}"
+      callbacks:
+        on_left: "toggle_volume_menu"
+        on_right: "toggle_mute"
+
+  battery:
+    type: "yasb.battery.BatteryWidget"
+    options:
+      label: "Akku: {percent}%"
+      label_alt: "Akku: {percent}% / {time_remaining}"
+      hide_unsupported: true
+      charging_options:
+        blink_charging_icon: false
+      callbacks:
+        on_left: "toggle_label"
+
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "{%H:%M}"
+      label_alt: "{%d.%m.%Y}"
+      callbacks:
+        on_left: "toggle_label"
+
+  power:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      label: "Toiminnot"
+      uptime: false
+      blur_background: false
+      animation_duration: 0
+      button_row: 1
+      buttons:
+        lock: ["", "Lukitse"]
+        sleep: ["", "Lepotila"]
+        restart: ["", "Käynnistä uudelleen"]
+        shutdown: ["", "Sammuta"]
+        cancel: ["", "Peruuta"]
