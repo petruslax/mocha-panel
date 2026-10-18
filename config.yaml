@@ -4,7 +4,7 @@ watch_stylesheet: true
 
 bars:
   mocha_panel:
-    enabled: true
+    enabled: true 
     class_name: "mocha-panel"
     screens: ["primary"]
     alignment:
@@ -13,53 +13,67 @@ bars:
       width: "100%"
       height: 40
     window_flags:
-      windows_app_bar: false
       auto_hide: false
       hide_on_maximized: true
     widgets:
       left: ["audio", "battery"]
       center: ["clock"]
-      right: ["power"]
+      right: ["wifi", "power"]
 
 widgets:
   audio:
     type: "yasb.volume.VolumeWidget"
     options:
-      label: "Ääni: {level}"
+      label: "<span>{icon}</span>{level}"
+      icons: ["\ueee8", "\uf026", "\uf027", "\uefcf", "\uf028"]
       callbacks:
-        on_left: "toggle_volume_menu"
         on_right: "toggle_mute"
 
   battery:
     type: "yasb.battery.BatteryWidget"
     options:
-      label: "Akku: {percent}%"
-      label_alt: "Akku: {percent}% / {time_remaining}"
-      hide_unsupported: true
-      charging_options:
-        blink_charging_icon: false
+      label: "<span>{icon}</span>{percent}%"
+      label_alt: "<span>{icon}</span>{percent}% / {time_remaining}"
+      status_thresholds:
+        critical: 10
+        low: 25
+        medium: 50
+        high: 75
+        full: 100
+      status_icons:
+        icon_charging: "\uf0e7" # nf-fa-bolt
+        icon_critical: "\uf244" # nf-fa-battery-empty
+        icon_low: "\uf243" # nf-fa-battery-quarter
+        icon_medium: "\uf242" # nf-fa-battery-half
+        icon_high: "\uf241" # nf-fa-battery-three-quarters
+        icon_full: "\uf240" # nf-fa-battery-full
       callbacks:
         on_left: "toggle_label"
 
   clock:
     type: "yasb.clock.ClockWidget"
     options:
-      label: "{%H:%M}"
-      label_alt: "{%d.%m.%Y}"
+      label: "<span>{icon}</span> {%H:%M}"
+      label_alt: "<span>{icon}</span> {%d.%m.%Y}"
       callbacks:
         on_left: "toggle_label"
 
   power:
     type: "yasb.power_menu.PowerMenuWidget"
     options:
-      label: "Toiminnot"
-      uptime: false
-      blur_background: false
-      animation_duration: 0
+      label: "<span>\uf011</span>"
       button_row: 1
       buttons:
-        lock: ["", "Lukitse"]
-        sleep: ["", "Lepotila"]
-        restart: ["", "Käynnistä uudelleen"]
-        shutdown: ["", "Sammuta"]
-        cancel: ["", "Peruuta"]
+        lock: ["\uf023", "Lock"]
+        sleep: ["\u23fe", "Sleep"]
+        restart: ["\uead2", "Restart"]
+        shutdown: ["\uf011", "Power Off"]
+        cancel: ["\udb81\udf3a", "Cancel"]
+
+  wifi:
+    type: "yasb.wifi.WifiWidget"
+    options:
+      label: "<span>{wifi_icon}</span>"
+      label_alt: "<span>{wifi_icon}</span> {wifi_name}"
+      callbacks:
+        on_left: "toggle_label"

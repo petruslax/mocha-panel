@@ -1,5 +1,9 @@
 ﻿/* Catppuccin Mocha palette: https://catppuccin.com/palette/ */
 :root {
+  /* Fonts: change these values to update text and icons throughout the theme. */
+  --font-text: "JetBrainsMono NFP";
+  --font-icons: "JetBrainsMono NFP";
+
   --mocha-rosewater: #f5e0dc;
   --mocha-flamingo: #f2cdcd;
   --mocha-pink: #f5c2e7;
@@ -32,15 +36,23 @@
   background-color: var(--mocha-base);
 }
 
+* {
+  font-family: var(--font-text);
+}
+
 .mocha-panel QLabel,
 .audio-menu QLabel,
 .power-menu-popup QLabel {
-  font-family: "Segoe UI";
   font-size: 13px;
-  color: #eeeeee;
+  color: var(--mocha-text);
 }
 
-/* Bar controls. Add widget-specific styles here as needed. */
+.icon {
+  font-family: var(--font-icons);
+  font-size: 13px;
+}
+
+/* Bar controls */
 .mocha-panel .widget {
   padding: 0 6px;
 }
@@ -59,7 +71,7 @@
   background-color: var(--mocha-surface1);
 }
 
-/* Text-only session controls. */
+/* Power Menu */
 .power-menu-overlay {
   background-color: var(--mocha-base);
 }
