@@ -7,6 +7,7 @@ The project contains my own widget selection, layout, and styling. It uses the C
 ## Requirements
 
 - [YASB](https://github.com/amnweb/yasb)
+- [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads)
 
 ## Files
 

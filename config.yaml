@@ -1,4 +1,4 @@
-﻿# Mocha panel
+# Mocha panel
 watch_config: true
 watch_stylesheet: true
 
@@ -14,17 +14,20 @@ bars:
       height: 40
     window_flags:
       auto_hide: false
-      hide_on_maximized: true
+      always_on_top: false
+      windows_app_bar: true
+      hide_on_maximized: false
     widgets:
-      left: ["audio", "battery"]
+      left: [cpu , memory]
       center: ["clock"]
-      right: ["wifi", "power"]
+      right: ["wifi","audio" ,"battery", "power"]
 
 widgets:
   audio:
     type: "yasb.volume.VolumeWidget"
     options:
       label: "<span>{icon}</span>{level}"
+      mute_text: ""
       icons: ["\ueee8", "\uf026", "\uf027", "\uefcf", "\uf028"]
       callbacks:
         on_right: "toggle_mute"
@@ -75,5 +78,25 @@ widgets:
     options:
       label: "<span>{wifi_icon}</span>"
       label_alt: "<span>{wifi_icon}</span> {wifi_name}"
+      callbacks:
+        on_left: "toggle_label"
+
+  cpu:
+    type: "yasb.cpu.CpuWidget"
+    options:
+      label: "<span>\uf4bc</span>{info[percent][total]}%"
+      label_alt: "<span>\uf4bc</span> CPU {info[percent][total]}%"
+      update_interval: 2000
+      hide_decimal: true
+      callbacks:
+        on_left: "toggle_label"
+
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uefc5</span>{virtual_mem_percent}%"
+      label_alt: "<span>\uefc5</span> RAM {virtual_mem_percent}%"
+      update_interval: 2000
+      hide_decimal: true
       callbacks:
         on_left: "toggle_label"
