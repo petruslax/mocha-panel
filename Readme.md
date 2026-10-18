@@ -1,13 +1,14 @@
 # Mocha-panel
 
-A personal status bar configuration for Windows using YASB.
+A customizable status bar theme for Windows using YASB.
 
 The project contains my own widget selection, layout, and styling. It uses the Catppuccin Mocha color palette.
 
 ## Requirements
 
-- [YASB](https://github.com/amnweb/yasb)
-- [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads)
+- [YASB releases (choose installer for your device)](https://github.com/amnweb/yasb/releases/latest/)
+- [JetBrainsMono Nerd Font (download zip)](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip)
+- Segoe Fluent Icons for Wi-Fi and Bluetooth menu icons. Included in Windows 11; Windows 10 users need to install it.
 
 ## Files
 
@@ -16,7 +17,7 @@ The project contains my own widget selection, layout, and styling. It uses the C
 
 ## Installation
 
-1. Install YASB and JetBrainsMono Nerd Font.
+1. Install YASB and JetBrainsMono Nerd Font (see Requirements).
 2. Copy `config.yaml` and `styles.css` into your YASB configuration folder.
 3. Restart or reload YASB.
 

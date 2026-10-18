@@ -42,6 +42,8 @@
 
 .mocha-panel QLabel,
 .audio-menu QLabel,
+.wifi-menu QLabel,
+.bluetooth-menu QLabel,
 .power-menu-popup QLabel {
   font-size: 13px;
   color: var(--mocha-text);
@@ -69,6 +71,144 @@
 .audio-menu .audio-container .device:hover,
 .audio-menu .audio-container .device.selected {
   background-color: var(--mocha-surface1);
+}
+
+/* Network menus: left click opens the menu, right click changes the bar label. */
+.wifi-menu,
+.bluetooth-menu {
+  background-color: var(--mocha-base);
+  color: var(--mocha-text);
+  min-width: 360px;
+  min-height: 300px;
+  max-height: 480px;
+}
+
+.wifi-menu .header,
+.bluetooth-menu .header {
+  background-color: var(--mocha-mantle);
+  padding: 12px;
+  border-bottom: 1px solid var(--mocha-surface1);
+}
+
+.wifi-menu .header,
+.bluetooth-menu .title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mocha-text);
+}
+
+.wifi-menu .wifi-list,
+.bluetooth-menu .bluetooth-list {
+  background-color: transparent;
+  border: none;
+}
+
+.wifi-menu .wifi-item,
+.bluetooth-menu .bluetooth-item {
+  min-height: 42px;
+  padding: 8px 12px;
+  margin: 2px 4px;
+  border-radius: 6px;
+}
+
+.wifi-menu .wifi-item:hover,
+.bluetooth-menu .bluetooth-item:hover {
+  background-color: var(--mocha-surface0);
+}
+
+.wifi-menu .wifi-item[active=true],
+.bluetooth-menu .bluetooth-item.active {
+  background-color: var(--mocha-surface1);
+}
+
+.wifi-menu .wifi-item[active=true] {
+  min-height: 80px;
+}
+
+.wifi-menu .icon,
+.wifi-menu .refresh-icon,
+.bluetooth-menu .icon,
+.bluetooth-menu .battery-icon,
+.bluetooth-menu .scan-icon {
+  font-family: "Segoe Fluent Icons";
+  color: var(--mocha-blue);
+}
+
+.wifi-menu .wifi-item .icon,
+.bluetooth-menu .bluetooth-item .icon {
+  font-size: 22px;
+  margin-right: 12px;
+}
+
+.wifi-menu .status,
+.wifi-menu .strength,
+.bluetooth-menu .status,
+.bluetooth-menu .battery,
+.bluetooth-menu .section-title {
+  color: var(--mocha-subtext0);
+  font-size: 12px;
+}
+
+.bluetooth-menu .section-title {
+  padding: 10px 12px 4px;
+}
+
+.wifi-menu .controls-container,
+.bluetooth-menu .controls-container {
+  padding-top: 8px;
+}
+
+.wifi-menu QPushButton,
+.bluetooth-menu QPushButton {
+  background-color: var(--mocha-surface0);
+  color: var(--mocha-text);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+.wifi-menu QPushButton:hover,
+.bluetooth-menu QPushButton:hover {
+  background-color: var(--mocha-surface1);
+}
+
+.wifi-menu QPushButton:pressed,
+.bluetooth-menu QPushButton:pressed,
+.bluetooth-menu .power-button:checked {
+  background-color: var(--mocha-blue);
+  color: var(--mocha-base);
+}
+
+.wifi-menu QPushButton:disabled,
+.bluetooth-menu QPushButton:disabled {
+  color: var(--mocha-overlay0);
+}
+
+.wifi-menu .password {
+  background-color: var(--mocha-mantle);
+  color: var(--mocha-text);
+  border: 1px solid var(--mocha-surface2);
+  border-radius: 4px;
+  padding: 6px;
+}
+
+.wifi-menu .footer,
+.bluetooth-menu .footer {
+  background-color: var(--mocha-mantle);
+  border-top: 1px solid var(--mocha-surface1);
+  padding: 10px 12px;
+}
+
+.wifi-menu .error-message,
+.bluetooth-menu .error-message {
+  color: var(--mocha-red);
+  padding: 10px 12px;
+}
+
+.wifi-menu .progress-bar,
+.bluetooth-menu .progress-bar {
+  max-height: 2px;
+  color: var(--mocha-blue);
 }
 
 /* Power Menu */

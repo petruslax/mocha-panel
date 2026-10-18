@@ -20,7 +20,7 @@ bars:
     widgets:
       left: [cpu , memory]
       center: ["clock"]
-      right: ["wifi","audio" ,"battery", "power"]
+      right: ["wifi","bluetooth" ,"audio" ,"battery", "power"]
 
 widgets:
   audio:
@@ -56,10 +56,12 @@ widgets:
   clock:
     type: "yasb.clock.ClockWidget"
     options:
-      label: "<span>{icon}</span> {%H:%M}"
-      label_alt: "<span>{icon}</span> {%d.%m.%Y}"
+      label: "{%H:%M:%S}"
+      label_alt: "{%a, %b %d, %Y %H:%M}"
       callbacks:
         on_left: "toggle_label"
+        on_right: "do_nothing"
+      tooltip: false
 
   power:
     type: "yasb.power_menu.PowerMenuWidget"
@@ -79,7 +81,15 @@ widgets:
       label: "<span>{wifi_icon}</span>"
       label_alt: "<span>{wifi_icon}</span> {wifi_name}"
       callbacks:
-        on_left: "toggle_label"
+        on_left: "toggle_menu"
+        on_right: "toggle_label"
+      menu_config:
+        blur: true
+        round_corners: true
+        border_color: "#45475a"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
 
   cpu:
     type: "yasb.cpu.CpuWidget"
@@ -100,3 +110,19 @@ widgets:
       hide_decimal: true
       callbacks:
         on_left: "toggle_label"
+
+  bluetooth:
+    type: "yasb.bluetooth.BluetoothWidget"
+    options:
+      label: "<span>\udb80\udcaf</span>"
+      label_alt: "<span>\udb80\udcaf</span> {device_name}"
+      callbacks:
+        on_left: "toggle_menu"
+        on_right: "toggle_label"
+      menu_config:
+        blur: true
+        round_corners: true
+        border_color: "#45475a"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
