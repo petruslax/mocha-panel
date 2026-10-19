@@ -8,7 +8,7 @@ The project contains my own widget selection, layout, and styling. It uses the C
 
 - [YASB releases (choose installer for your device)](https://github.com/amnweb/yasb/releases/latest/)
 - [JetBrainsMono Nerd Font (download zip)](https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip)
-- Segoe Fluent Icons for Wi-Fi and Bluetooth menu icons. Included in Windows 11; Windows 10 users need to install it.
+- Segoe Fluent Icons for bar and menu icons. Included in Windows 11; Windows 10 users need to install it.
 
 ## Files
 

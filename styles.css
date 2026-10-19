@@ -1,8 +1,9 @@
 ﻿/* Catppuccin Mocha palette: https://catppuccin.com/palette/ */
 :root {
-  /* Fonts: change these values to update text and icons throughout the theme. */
+  /* Bar icons use Segoe Fluent Icons; Bluetooth and power use Nerd Font. */
   --font-text: "JetBrainsMono NFP";
-  --font-icons: "JetBrainsMono NFP";
+  --font-icons: "Segoe Fluent Icons";
+  --font-nerd-icons: "JetBrainsMono NFP";
 
   --mocha-rosewater: #f5e0dc;
   --mocha-flamingo: #f2cdcd;
@@ -33,7 +34,9 @@
 }
 
 .mocha-panel {
-  background-color: var(--mocha-base);
+  background-color: var(--mocha-mantle);
+  border-bottom: 1px solid var(--mocha-surface0);
+  padding: 0 6px;
 }
 
 * {
@@ -49,31 +52,194 @@
   color: var(--mocha-text);
 }
 
-.icon {
+.mocha-panel .icon {
   font-family: var(--font-icons);
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 0 5px 0 0;
+}
+
+.mocha-panel .label {
+  padding: 0 1px;
+  font-weight: 500;
 }
 
 /* Bar controls */
 .mocha-panel .widget {
-  padding: 0 6px;
+  padding: 0;
+  margin: 5px 3px;
 }
 
-/* Audio output selection. */
+.mocha-panel .widget-container {
+  background-color: var(--mocha-base);
+  border: 1px solid var(--mocha-surface0);
+  border-radius: 9px;
+  padding: 0 9px;
+}
+
+.mocha-panel .widget-container:hover {
+  background-color: var(--mocha-surface0);
+  border-color: var(--mocha-surface1);
+}
+
+.cpu-widget .label,
+.memory-widget .label {
+  min-width: 38px;
+}
+
+/* CPU */
+.cpu-widget .widget-container:hover {
+  border-color: var(--mocha-peach);
+}
+
+.cpu-widget .icon {
+  color: var(--mocha-peach);
+}
+
+/* Memory */
+.memory-widget .widget-container:hover {
+  border-color: var(--mocha-mauve);
+}
+
+.memory-widget .icon {
+  color: var(--mocha-mauve);
+}
+
+/* Wi-Fi */
+.wifi-widget .widget-container:hover {
+  border-color: var(--mocha-sky);
+}
+
+.wifi-widget .icon {
+  color: var(--mocha-sky);
+  padding: 0 2px;
+}
+
+/* Bluetooth */
+.bluetooth-widget .widget-container:hover {
+  border-color: var(--mocha-blue);
+}
+
+.bluetooth-widget .icon {
+  font-family: var(--font-nerd-icons);
+  color: var(--mocha-blue);
+  padding: 0 2px;
+}
+
+.bluetooth-widget .icon.bt-connected {
+  color: var(--mocha-teal);
+}
+
+.bluetooth-widget .icon.bt-off {
+  color: var(--mocha-overlay1);
+}
+
+/* Volume */
+.volume-widget .widget-container:hover {
+  border-color: var(--mocha-yellow);
+}
+
+.volume-widget .icon {
+  color: var(--mocha-yellow);
+}
+
+.volume-widget .icon.muted {
+  color: var(--mocha-overlay1);
+}
+
+/* Battery */
+.battery-widget .widget-container:hover {
+  border-color: var(--mocha-green);
+}
+
+.battery-widget .icon {
+  color: var(--mocha-green);
+}
+
+/* Clock */
+.clock-widget .widget-container {
+  border-color: var(--mocha-surface1);
+  padding: 0 11px;
+}
+
+.clock-widget .widget-container:hover {
+  border-color: var(--mocha-mauve);
+}
+
+.clock-widget .icon {
+  color: var(--mocha-mauve);
+}
+
+.clock-widget .label {
+  font-weight: 600;
+}
+
+/* Power */
+.power-menu-widget .widget-container:hover {
+  border-color: var(--mocha-red);
+}
+
+.power-menu-widget .icon {
+  font-family: var(--font-nerd-icons);
+  color: var(--mocha-red);
+  padding: 0 2px;
+}
+
+.power-menu-widget .widget-container:hover .icon {
+  color: var(--mocha-maroon);
+}
+
+/* Audio */
 .audio-menu {
   background-color: var(--mocha-base);
+  min-width: 330px;
+  padding: 10px;
 }
 
 .audio-menu .audio-container .device {
-  padding: 6px;
+  background-color: transparent;
+  color: var(--mocha-text);
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 9px 10px;
+  margin: 2px 0;
 }
 
-.audio-menu .audio-container .device:hover,
-.audio-menu .audio-container .device.selected {
+.audio-menu .audio-container .device:hover {
   background-color: var(--mocha-surface1);
 }
 
-/* Network menus: left click opens the menu, right click changes the bar label. */
+.audio-menu .audio-container .device.selected {
+  background-color: var(--mocha-surface1);
+  border-color: var(--mocha-yellow);
+}
+
+.audio-menu .volume-slider {
+  min-height: 24px;
+  border: none;
+}
+
+.audio-menu .volume-slider::groove:horizontal {
+  height: 4px;
+  background-color: var(--mocha-surface1);
+  border-radius: 2px;
+}
+
+.audio-menu .volume-slider::sub-page:horizontal {
+  background-color: var(--mocha-yellow);
+  border-radius: 2px;
+}
+
+.audio-menu .volume-slider::handle:horizontal {
+  background-color: var(--mocha-yellow);
+  border: 3px solid var(--mocha-base);
+  width: 10px;
+  height: 10px;
+  margin: -6px 0;
+  border-radius: 8px;
+}
+
+/* Network menus */
 .wifi-menu,
 .bluetooth-menu {
   background-color: var(--mocha-base);
@@ -83,14 +249,21 @@
   max-height: 480px;
 }
 
-.wifi-menu .header,
+.wifi-menu .header {
+  background-color: var(--mocha-mantle);
+  padding: 14px;
+  border-bottom: 1px solid var(--mocha-surface1);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--mocha-text);
+}
+
 .bluetooth-menu .header {
   background-color: var(--mocha-mantle);
-  padding: 12px;
+  padding: 14px;
   border-bottom: 1px solid var(--mocha-surface1);
 }
 
-.wifi-menu .header,
 .bluetooth-menu .title {
   font-size: 14px;
   font-weight: 600;
@@ -108,7 +281,8 @@
   min-height: 42px;
   padding: 8px 12px;
   margin: 2px 4px;
-  border-radius: 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
 }
 
 .wifi-menu .wifi-item:hover,
@@ -116,13 +290,15 @@
   background-color: var(--mocha-surface0);
 }
 
-.wifi-menu .wifi-item[active=true],
-.bluetooth-menu .bluetooth-item.active {
+.wifi-menu .wifi-item[active=true] {
   background-color: var(--mocha-surface1);
+  border-color: var(--mocha-surface2);
+  min-height: 80px;
 }
 
-.wifi-menu .wifi-item[active=true] {
-  min-height: 80px;
+.bluetooth-menu .bluetooth-item.active {
+  background-color: var(--mocha-surface1);
+  border-color: var(--mocha-surface2);
 }
 
 .wifi-menu .icon,
@@ -130,7 +306,7 @@
 .bluetooth-menu .icon,
 .bluetooth-menu .battery-icon,
 .bluetooth-menu .scan-icon {
-  font-family: "Segoe Fluent Icons";
+  font-family: var(--font-icons);
   color: var(--mocha-blue);
 }
 
@@ -143,13 +319,14 @@
 .wifi-menu .status,
 .wifi-menu .strength,
 .bluetooth-menu .status,
-.bluetooth-menu .battery,
-.bluetooth-menu .section-title {
+.bluetooth-menu .battery {
   color: var(--mocha-subtext0);
   font-size: 12px;
 }
 
 .bluetooth-menu .section-title {
+  color: var(--mocha-subtext0);
+  font-size: 12px;
   padding: 10px 12px 4px;
 }
 
@@ -163,8 +340,8 @@
   background-color: var(--mocha-surface0);
   color: var(--mocha-text);
   border: none;
-  border-radius: 4px;
-  padding: 6px 12px;
+  border-radius: 6px;
+  padding: 7px 12px;
 }
 
 .wifi-menu QPushButton:hover,
@@ -192,6 +369,10 @@
   padding: 6px;
 }
 
+.wifi-menu .password:focus {
+  border-color: var(--mocha-blue);
+}
+
 .wifi-menu .footer,
 .bluetooth-menu .footer {
   background-color: var(--mocha-mantle);
@@ -211,17 +392,55 @@
   color: var(--mocha-blue);
 }
 
+/* Compact scrollbars for device and network lists. */
+.bluetooth-menu QScrollBar:vertical {
+  background-color: transparent;
+  width: 6px;
+  margin: 4px 0;
+}
+
+.bluetooth-menu QScrollBar::handle:vertical {
+  background-color: var(--mocha-surface2);
+  min-height: 24px;
+  border-radius: 3px;
+}
+
+.bluetooth-menu QScrollBar::add-line:vertical,
+.bluetooth-menu QScrollBar::sub-line:vertical {
+  height: 0;
+}
+
+.bluetooth-menu QScrollBar::add-page:vertical,
+.bluetooth-menu QScrollBar::sub-page:vertical {
+  background-color: transparent;
+}
+
 /* Power Menu */
 .power-menu-overlay {
-  background-color: var(--mocha-base);
+  background-color: rgba(17, 17, 27, 0.88);
 }
 
 .power-menu-popup .button {
   width: 200px;
   height: 60px;
-  background-color: var(--mocha-surface0);
+  background-color: var(--mocha-base);
+  border: 1px solid var(--mocha-surface1);
+  border-radius: 12px;
+  margin: 4px;
+}
+
+.power-menu-popup .button .icon {
+  font-family: var(--font-nerd-icons);
+  font-size: 22px;
+  font-weight: normal;
+  color: var(--mocha-mauve);
+}
+
+.power-menu-popup .button .label {
+  font-weight: 600;
 }
 
 .power-menu-popup .button.hover {
-  background-color: var(--mocha-surface1);
+  background-color: var(--mocha-surface0);
+  border-color: var(--mocha-mauve);
 }

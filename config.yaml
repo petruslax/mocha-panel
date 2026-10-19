@@ -4,7 +4,7 @@ watch_stylesheet: true
 
 bars:
   mocha_panel:
-    enabled: true 
+    enabled: true
     class_name: "mocha-panel"
     screens: ["primary"]
     alignment:
@@ -18,62 +18,30 @@ bars:
       windows_app_bar: true
       hide_on_maximized: false
     widgets:
-      left: [cpu , memory]
-      center: ["clock"]
-      right: ["wifi","bluetooth" ,"audio" ,"battery", "power"]
+      left: ["cpu", "memory"]
+      center: []
+      right: ["wifi", "bluetooth", "audio", "battery", "clock", "power"]
 
 widgets:
-  audio:
-    type: "yasb.volume.VolumeWidget"
+  cpu:
+    type: "yasb.cpu.CpuWidget"
     options:
-      label: "<span>{icon}</span>{level}"
-      mute_text: ""
-      icons: ["\ueee8", "\uf026", "\uf027", "\uefcf", "\uf028"]
-      callbacks:
-        on_right: "toggle_mute"
-
-  battery:
-    type: "yasb.battery.BatteryWidget"
-    options:
-      label: "<span>{icon}</span>{percent}%"
-      label_alt: "<span>{icon}</span>{percent}% / {time_remaining}"
-      status_thresholds:
-        critical: 10
-        low: 25
-        medium: 50
-        high: 75
-        full: 100
-      status_icons:
-        icon_charging: "\uf0e7" # nf-fa-bolt
-        icon_critical: "\uf244" # nf-fa-battery-empty
-        icon_low: "\uf243" # nf-fa-battery-quarter
-        icon_medium: "\uf242" # nf-fa-battery-half
-        icon_high: "\uf241" # nf-fa-battery-three-quarters
-        icon_full: "\uf240" # nf-fa-battery-full
+      label: "<span>\ue950</span>{info[percent][total]}%"
+      label_alt: "<span>\ue950</span> CPU {info[percent][total]}%"
+      update_interval: 2000
+      hide_decimal: true
       callbacks:
         on_left: "toggle_label"
 
-  clock:
-    type: "yasb.clock.ClockWidget"
+  memory:
+    type: "yasb.memory.MemoryWidget"
     options:
-      label: "{%H:%M:%S}"
-      label_alt: "{%a, %b %d, %Y %H:%M}"
+      label: "<span>\ueea0</span>{virtual_mem_percent}%"
+      label_alt: "<span>\ueea0</span> RAM {virtual_mem_percent}%"
+      update_interval: 2000
+      hide_decimal: true
       callbacks:
         on_left: "toggle_label"
-        on_right: "do_nothing"
-      tooltip: false
-
-  power:
-    type: "yasb.power_menu.PowerMenuWidget"
-    options:
-      label: "<span>\uf011</span>"
-      button_row: 1
-      buttons:
-        lock: ["\uf023", "Lock"]
-        sleep: ["\u23fe", "Sleep"]
-        restart: ["\uead2", "Restart"]
-        shutdown: ["\uf011", "Power Off"]
-        cancel: ["\udb81\udf3a", "Cancel"]
 
   wifi:
     type: "yasb.wifi.WifiWidget"
@@ -83,39 +51,26 @@ widgets:
       callbacks:
         on_left: "toggle_menu"
         on_right: "toggle_label"
+      wifi_icons: ["\ue871", "\ue872", "\ue873", "\ue874", "\ue701"]
+      ethernet_label: "<span>{wifi_icon}</span>"
+      ethernet_label_alt: "<span>{wifi_icon}</span> {ip_addr}"
+      ethernet_icon: "\ue839"
       menu_config:
         blur: true
         round_corners: true
         border_color: "#45475a"
-        alignment: "right"
         direction: "down"
         offset_top: 6
-
-  cpu:
-    type: "yasb.cpu.CpuWidget"
-    options:
-      label: "<span>\uf4bc</span>{info[percent][total]}%"
-      label_alt: "<span>\uf4bc</span> CPU {info[percent][total]}%"
-      update_interval: 2000
-      hide_decimal: true
-      callbacks:
-        on_left: "toggle_label"
-
-  memory:
-    type: "yasb.memory.MemoryWidget"
-    options:
-      label: "<span>\uefc5</span>{virtual_mem_percent}%"
-      label_alt: "<span>\uefc5</span> RAM {virtual_mem_percent}%"
-      update_interval: 2000
-      hide_decimal: true
-      callbacks:
-        on_left: "toggle_label"
 
   bluetooth:
     type: "yasb.bluetooth.BluetoothWidget"
     options:
-      label: "<span>\udb80\udcaf</span>"
-      label_alt: "<span>\udb80\udcaf</span> {device_name}"
+      label: "<span>{icon}</span>"
+      label_alt: "<span>{icon}</span> {device_name}"
+      icons:
+        bluetooth_on: "\udb80\udcaf"
+        bluetooth_off: "\udb80\udcb2"
+        bluetooth_connected: "\udb80\udcb1"
       callbacks:
         on_left: "toggle_menu"
         on_right: "toggle_label"
@@ -126,3 +81,53 @@ widgets:
         alignment: "right"
         direction: "down"
         offset_top: 6
+      tooltip: false
+
+  audio:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span>{level}"
+      mute_text: ""
+      icons: ["\ue74f", "\ue992", "\ue993", "\ue994", "\ue995"]
+      callbacks:
+        on_right: "toggle_mute"
+      tooltip: false
+
+  battery:
+    type: "yasb.battery.BatteryWidget"
+    options:
+      label: "<span>{icon}</span>{percent}%"
+      label_alt: "<span>{icon}</span>{percent}% | {time_remaining}"
+      charging_options:
+        icon_format: "{charging_icon}"
+      status_icons:
+        icon_charging: "\ue83e"
+        icon_critical: "\ue850"
+        icon_low: "\ue852"
+        icon_medium: "\ue855"
+        icon_high: "\ue858"
+        icon_full: "\ue83f"
+      callbacks:
+        on_left: "toggle_label"
+
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "<span>\ue823</span>{%H:%M}"
+      label_alt: "<span>\ue787</span>{%d/%m/%Y }<span>\ue823</span>{%H:%M}"
+      callbacks:
+        on_left: "exec notification_center"
+        on_right: "toggle_label"
+      tooltip: false
+
+  power:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      label: "<span>\uf011</span>"
+      button_row: 1
+      buttons:
+        lock: ["\uf023", "Lock"]
+        sleep: ["\uf186", "Sleep"]
+        restart: ["\uead2", "Restart"]
+        shutdown: ["\uf011", "Power Off"]
+        cancel: ["\udb81\udf3a", "Cancel"]
