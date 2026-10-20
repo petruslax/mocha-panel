@@ -65,7 +65,6 @@
   padding: 0 6px;
 }
 
-/* Icons and labels */
 .mocha-panel .icon {
   font-family: var(--font-icons);
   font-size: 14px;
@@ -78,7 +77,6 @@
   font-weight: 500;
 }
 
-/* Widget spacing and containers */
 .mocha-panel .widget {
   padding: 0;
   margin: 5px 3px;
@@ -100,7 +98,6 @@
 /* 4. Widgets                                                                 */
 /* -------------------------------------------------------------------------- */
 
-/* Shared CPU and RAM label width */
 .cpu-widget .label,
 .memory-widget .label {
   min-width: 20px;
@@ -342,7 +339,6 @@
   padding: 12px;
 }
 
-/* Expanded task details share one row with category and action buttons. */
 .todo-menu {
   min-width: 500px;
   max-width: 600px;
@@ -446,7 +442,6 @@
   padding: 6px;
 }
 
-/* Keep status tabs joined; separate creation and sorting actions. */
 .todo-menu .header .add-task-button {
   margin-right: 12px;
 }
@@ -468,7 +463,6 @@
 }
 
 .todo-menu .tab-buttons.sort {
-  /* Qt stylesheets do not support display: none. */
   min-width: 0;
   max-width: 0;
   min-height: 0;
@@ -519,7 +513,6 @@
   border-color: var(--mocha-lavender);
 }
 
-/* Enter submits notes and saves edits without a visible action button. */
 .notes-menu .add-button {
   min-width: 0;
   max-width: 0;
@@ -540,7 +533,6 @@
 
 .todo-menu .task-item {
   padding: 10px;
-  /* Keep both edges inset and allow for YASB's negative right viewport margin. */
   margin: 4px 8px;
 }
 
@@ -698,7 +690,6 @@
   color: var(--mocha-blue);
 }
 
-/* Notes uses Fluent glyphs for its built-in menu actions. */
 .notes-menu .icon,
 .notes-menu .delete-button,
 .notes-menu .float-button,
@@ -722,7 +713,6 @@
   padding: 5px 7px;
 }
 
-/* Hide the copy action inside the note editor. */
 .notes-menu .input-copy-button {
   min-width: 0;
   max-width: 0;
@@ -953,7 +943,6 @@
   color: var(--mocha-blue);
 }
 
-/* Compact scrollbars for device, task and note lists. */
 .bluetooth-menu QScrollBar:vertical,
 .todo-menu QScrollBar:vertical,
 .notes-menu QScrollBar:vertical {
@@ -962,29 +951,19 @@
   margin: 4px 0;
 }
 
-.bluetooth-menu QScrollBar::handle:vertical,
-.todo-menu QScrollBar::handle:vertical,
-.notes-menu QScrollBar::handle:vertical {
+.bluetooth-menu QScrollBar::handle:vertical {
   background-color: var(--mocha-surface2);
   min-height: 24px;
   border-radius: 3px;
 }
 
 .bluetooth-menu QScrollBar::add-line:vertical,
-.bluetooth-menu QScrollBar::sub-line:vertical,
-.todo-menu QScrollBar::add-line:vertical,
-.todo-menu QScrollBar::sub-line:vertical,
-.notes-menu QScrollBar::add-line:vertical,
-.notes-menu QScrollBar::sub-line:vertical {
+.bluetooth-menu QScrollBar::sub-line:vertical {
   height: 0;
 }
 
 .bluetooth-menu QScrollBar::add-page:vertical,
-.bluetooth-menu QScrollBar::sub-page:vertical,
-.todo-menu QScrollBar::add-page:vertical,
-.todo-menu QScrollBar::sub-page:vertical,
-.notes-menu QScrollBar::add-page:vertical,
-.notes-menu QScrollBar::sub-page:vertical {
+.bluetooth-menu QScrollBar::sub-page:vertical {
   background-color: transparent;
 }
 
