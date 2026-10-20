@@ -19,15 +19,15 @@ bars:
       hide_on_maximized: false
     widgets:
       left: ["cpu", "memory"]
-      center: []
-      right: ["wifi", "bluetooth", "audio", "battery", "clock", "power"]
+      center: ["clock", "pomodoro", "todo", "notes"]
+      right: ["wifi", "bluetooth", "audio", "battery", "power"]
 
 widgets:
   cpu:
     type: "yasb.cpu.CpuWidget"
     options:
-      label: "<span>\ue950</span>{info[percent][total]}%"
-      label_alt: "<span>\ue950</span> CPU {info[percent][total]}%"
+      label: "<span>\uf2db</span>{info[percent][total]}%"
+      label_alt: "<span>\uf2db</span> CPU {info[percent][total]}%"
       update_interval: 2000
       hide_decimal: true
       callbacks:
@@ -36,12 +36,69 @@ widgets:
   memory:
     type: "yasb.memory.MemoryWidget"
     options:
-      label: "<span>\ueea0</span>{virtual_mem_percent}%"
-      label_alt: "<span>\ueea0</span> RAM {virtual_mem_percent}%"
+      label: "<span>\uefc5</span>{virtual_mem_percent}%"
+      label_alt: "<span>\uefc5</span> RAM {virtual_mem_percent}%"
       update_interval: 2000
       hide_decimal: true
       callbacks:
         on_left: "toggle_label"
+
+  pomodoro:
+    type: "yasb.pomodoro.PomodoroWidget"
+    options:
+      label: "<span>{icon}</span>{remaining}"
+      label_alt: "<span>{icon}</span> {remaining} | {elapsed}"
+      work_duration: 30
+      break_duration: 5
+      long_break_duration: 15
+      long_break_interval: 3
+      auto_start_breaks: true
+      auto_start_work: true
+      callbacks:
+        on_left: "toggle_menu"
+        on_right: "toggle_label"
+        on_middle: "reset_timer"
+      menu:
+        alignment: "left"
+        border_color: "#45475a"
+
+  todo:
+    type: "yasb.todo.TodoWidget"
+    options:
+      label: "<span>\uf0ae</span>Tasks"
+      label_alt: "<span>\uf0ae</span>Tasks {count}/{completed}"
+      callbacks:
+        on_left: "toggle_menu"
+        on_right: "toggle_label"
+      menu:
+        alignment: "left"
+        border_color: "#45475a"
+      categories:
+        default:
+          label: "Important"
+        school:
+          label: "School"
+        projects:
+          label: "Projects"
+      icons:
+        add: "\uf501 New Task"
+        checked: "\uf4a7"
+        unchecked: "\ue640"
+
+  notes:
+    type: "yasb.notes.NotesWidget"
+    options:
+      label: "<span>\udb85\udce7</span>Notes"
+      paste_plain_text: true
+      enter_to_add_note: true
+      icons:
+        copy: "\uf0c5"
+      callbacks:
+        on_left: "toggle_menu"
+        on_right: ""
+      menu:
+        alignment: "left"
+        border_color: "#45475a"
 
   wifi:
     type: "yasb.wifi.WifiWidget"
@@ -51,6 +108,7 @@ widgets:
       callbacks:
         on_left: "toggle_menu"
         on_right: "toggle_label"
+      # Show both Wi-Fi and disconnected glyphs when there is no signal.
       wifi_icons: ["\ue871", "\ue872", "\ue873", "\ue874", "\ue701"]
       ethernet_label: "<span>{wifi_icon}</span>"
       ethernet_label_alt: "<span>{wifi_icon}</span> {ip_addr}"
@@ -88,7 +146,7 @@ widgets:
     options:
       label: "<span>{icon}</span>{level}"
       mute_text: ""
-      icons: ["\ue74f", "\ue992", "\ue993", "\ue994", "\ue995"]
+      icons: ["\ueee8", "\uf026", "\uf027", "\uefcf", "\uf028"]
       callbacks:
         on_right: "toggle_mute"
       tooltip: false
@@ -96,25 +154,31 @@ widgets:
   battery:
     type: "yasb.battery.BatteryWidget"
     options:
-      label: "<span>{icon}</span>{percent}%"
-      label_alt: "<span>{icon}</span>{percent}% | {time_remaining}"
+      label: "<span class='label'>{icon} {percent}%</span>"
+      label_alt: "<span class='label'>{icon} {percent}% | {time_remaining}</span>"
       charging_options:
         icon_format: "{charging_icon}"
       status_icons:
-        icon_charging: "\ue83e"
-        icon_critical: "\ue850"
-        icon_low: "\ue852"
-        icon_medium: "\ue855"
-        icon_high: "\ue858"
-        icon_full: "\ue83f"
+        icon_charging: "\udb80\udc84"
+        icon_critical: "\udb80\udc8e"
+        icon_low: "\udb80\udc7c"
+        icon_medium: "\udb80\udc7e"
+        icon_high: "\udb80\udc80"
+        icon_full: "\udb80\udc79"
+      status_thresholds:
+        critical: 10
+        low: 30
+        medium: 60
+        high: 85
+        full: 95
       callbacks:
         on_left: "toggle_label"
 
   clock:
     type: "yasb.clock.ClockWidget"
     options:
-      label: "<span>\ue823</span>{%H:%M}"
-      label_alt: "<span>\ue787</span>{%d/%m/%Y }<span>\ue823</span>{%H:%M}"
+      label: "<span>\ueab0</span>{%d/%m/%Y }<span>\uf017</span>{%H:%M}"
+      label_alt: "<span>\uf017</span>{%H:%M}"
       callbacks:
         on_left: "exec notification_center"
         on_right: "toggle_label"

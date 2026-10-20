@@ -1,10 +1,16 @@
 ﻿/* Catppuccin Mocha palette: https://catppuccin.com/palette/ */
-:root {
-  /* Bar icons use Segoe Fluent Icons; Bluetooth and power use Nerd Font. */
-  --font-text: "JetBrainsMono NFP";
-  --font-icons: "Segoe Fluent Icons";
-  --font-nerd-icons: "JetBrainsMono NFP";
 
+/* -------------------------------------------------------------------------- */
+/* 1. Fonts and colors                                                        */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  /* Nerd Font is the default; use Fluent explicitly where needed. */
+  --font-text: "JetBrainsMono NFP";
+  --font-icons: "JetBrainsMono NFP";
+  --font-fluent-icons: "Segoe Fluent Icons";
+
+  /* Accent colors */
   --mocha-rosewater: #f5e0dc;
   --mocha-flamingo: #f2cdcd;
   --mocha-pink: #f5c2e7;
@@ -19,19 +25,39 @@
   --mocha-sapphire: #74c7ec;
   --mocha-blue: #89b4fa;
   --mocha-lavender: #b4befe;
+
+  /* Text */
   --mocha-text: #cdd6f4;
   --mocha-subtext1: #bac2de;
   --mocha-subtext0: #a6adc8;
+
+  /* Overlays and surfaces */
   --mocha-overlay2: #9399b2;
   --mocha-overlay1: #7f849c;
   --mocha-overlay0: #6c7086;
   --mocha-surface2: #585b70;
   --mocha-surface1: #45475a;
   --mocha-surface0: #313244;
+
+  /* Backgrounds */
   --mocha-base: #1e1e2e;
   --mocha-mantle: #181825;
   --mocha-crust: #11111b;
 }
+
+/* -------------------------------------------------------------------------- */
+/* 2. Base styles                                                             */
+/* -------------------------------------------------------------------------- */
+
+* {
+  font-family: var(--font-text);
+  font-size: 12px;
+  color: var(--mocha-text);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. Bar layout and shared widget styles                                     */
+/* -------------------------------------------------------------------------- */
 
 .mocha-panel {
   background-color: var(--mocha-mantle);
@@ -39,19 +65,7 @@
   padding: 0 6px;
 }
 
-* {
-  font-family: var(--font-text);
-}
-
-.mocha-panel QLabel,
-.audio-menu QLabel,
-.wifi-menu QLabel,
-.bluetooth-menu QLabel,
-.power-menu-popup QLabel {
-  font-size: 13px;
-  color: var(--mocha-text);
-}
-
+/* Icons and labels */
 .mocha-panel .icon {
   font-family: var(--font-icons);
   font-size: 14px;
@@ -64,7 +78,7 @@
   font-weight: 500;
 }
 
-/* Bar controls */
+/* Widget spacing and containers */
 .mocha-panel .widget {
   padding: 0;
   margin: 5px 3px;
@@ -82,105 +96,220 @@
   border-color: var(--mocha-surface1);
 }
 
+/* -------------------------------------------------------------------------- */
+/* 4. Widgets                                                                 */
+/* -------------------------------------------------------------------------- */
+
+/* Shared CPU and RAM label width */
 .cpu-widget .label,
 .memory-widget .label {
-  min-width: 38px;
+  min-width: 20px;
 }
 
-/* CPU */
+/***---------------------------------      CPU Widget        ----------------------------------***/
 .cpu-widget .widget-container:hover {
   border-color: var(--mocha-peach);
 }
 
-.cpu-widget .icon {
+.cpu-widget .icon,
+.cpu-widget .label {
   color: var(--mocha-peach);
 }
 
-/* Memory */
+/***---------------------------------      RAM Widget        ----------------------------------***/
 .memory-widget .widget-container:hover {
   border-color: var(--mocha-mauve);
 }
 
-.memory-widget .icon {
+.memory-widget .icon,
+.memory-widget .label {
   color: var(--mocha-mauve);
 }
 
-/* Wi-Fi */
+/***---------------------------------      Pomodoro Widget   ----------------------------------***/
+.pomodoro-widget .label {
+  min-width: 42px;
+}
+
+.pomodoro-widget .icon,
+.pomodoro-widget .label {
+  color: var(--mocha-green);
+}
+
+.pomodoro-widget .icon.break,
+.pomodoro-widget .label.break {
+  color: var(--mocha-blue);
+}
+
+.pomodoro-widget .icon.paused,
+.pomodoro-widget .label.paused {
+  color: var(--mocha-peach);
+}
+
+.pomodoro-widget .widget-container:hover {
+  border-color: var(--mocha-green);
+}
+
+/***---------------------------------      Todo Widget       ----------------------------------***/
+.todo-widget .widget-container {
+  background-color: rgba(137, 180, 250, 0.08);
+}
+
+.todo-widget .icon,
+.todo-widget .label {
+  color: var(--mocha-blue);
+}
+
+.todo-widget .widget-container:hover {
+  border-color: var(--mocha-blue);
+}
+
+/***---------------------------------      Notes Widget      ----------------------------------***/
+.notes-widget .widget-container {
+  background-color: rgba(250, 179, 135, 0.08);
+}
+
+.notes-widget .icon,
+.notes-widget .label {
+  color: var(--mocha-peach);
+}
+
+.notes-widget .widget-container:hover {
+  border-color: var(--mocha-peach);
+}
+
+/***---------------------------------      Wi-Fi Widget      ----------------------------------***/
 .wifi-widget .widget-container:hover {
   border-color: var(--mocha-sky);
 }
 
 .wifi-widget .icon {
+  font-family: var(--font-fluent-icons);
   color: var(--mocha-sky);
   padding: 0 2px;
 }
 
-/* Bluetooth */
+.wifi-widget .label {
+  color: var(--mocha-sky);
+}
+
+/***---------------------------------      Bluetooth Widget ----------------------------------***/
 .bluetooth-widget .widget-container:hover {
   border-color: var(--mocha-blue);
 }
 
 .bluetooth-widget .icon {
-  font-family: var(--font-nerd-icons);
   color: var(--mocha-blue);
   padding: 0 2px;
 }
 
-.bluetooth-widget .icon.bt-connected {
+.bluetooth-widget .label {
+  color: var(--mocha-blue);
+}
+
+.bluetooth-widget .icon.bt-connected,
+.bluetooth-widget .label.bt-connected {
   color: var(--mocha-teal);
 }
 
-.bluetooth-widget .icon.bt-off {
+.bluetooth-widget .icon.bt-off,
+.bluetooth-widget .label.bt-off {
   color: var(--mocha-overlay1);
 }
 
-/* Volume */
+/***---------------------------------      Audio Widget      ----------------------------------***/
 .volume-widget .widget-container:hover {
   border-color: var(--mocha-yellow);
 }
 
-.volume-widget .icon {
+.volume-widget .icon,
+.volume-widget .label {
   color: var(--mocha-yellow);
 }
 
 .volume-widget .icon.muted {
-  color: var(--mocha-overlay1);
+  color: var(--mocha-red);
 }
 
-/* Battery */
+/***---------------------------------      Battery Widget    ----------------------------------***/
+.battery-widget .widget-container,
 .battery-widget .widget-container:hover {
-  border-color: var(--mocha-green);
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }
 
-.battery-widget .icon {
+.battery-widget .label {
+  background-color: var(--mocha-base);
+  border: 1px solid var(--mocha-surface0);
+  border-radius: 9px;
+  padding: 0 9px;
+}
+
+.battery-widget .label:hover {
+  background-color: var(--mocha-surface0);
+}
+
+.battery-widget .label.status-critical,
+.battery-widget .label.status-low {
+  color: var(--mocha-red);
+}
+
+.battery-widget .label.status-critical:hover,
+.battery-widget .label.status-low:hover {
+  border-color: var(--mocha-red);
+}
+
+.battery-widget .label.status-medium {
+  color: var(--mocha-yellow);
+}
+
+.battery-widget .label.status-medium:hover {
+  border-color: var(--mocha-yellow);
+}
+
+.battery-widget .label.status-high,
+.battery-widget .label.status-full {
   color: var(--mocha-green);
 }
 
-/* Clock */
+.battery-widget .label.status-high:hover,
+.battery-widget .label.status-full:hover {
+  border-color: var(--mocha-green);
+}
+
+.battery-widget .label.status-charging {
+  color: var(--mocha-teal);
+}
+
+.battery-widget .label.status-charging:hover {
+  border-color: var(--mocha-teal);
+}
+
+/***---------------------------------      Clock Widget      ----------------------------------***/
 .clock-widget .widget-container {
-  border-color: var(--mocha-surface1);
   padding: 0 11px;
 }
 
 .clock-widget .widget-container:hover {
-  border-color: var(--mocha-mauve);
+  border-color: var(--mocha-teal);
 }
 
 .clock-widget .icon {
-  color: var(--mocha-mauve);
+  color: var(--mocha-teal);
 }
 
 .clock-widget .label {
+  color: var(--mocha-teal);
   font-weight: 600;
 }
 
-/* Power */
+/***---------------------------------      Power Widget      ----------------------------------***/
 .power-menu-widget .widget-container:hover {
   border-color: var(--mocha-red);
 }
 
 .power-menu-widget .icon {
-  font-family: var(--font-nerd-icons);
   color: var(--mocha-red);
   padding: 0 2px;
 }
@@ -189,7 +318,439 @@
   color: var(--mocha-maroon);
 }
 
-/* Audio */
+/* -------------------------------------------------------------------------- */
+/* 5. Menus                                                                   */
+/* -------------------------------------------------------------------------- */
+
+/***----------------------------      Productivity Menus      ---------------------------------***/
+.pomodoro-menu,
+.todo-menu,
+.notes-menu,
+.todo-menu .app-dialog {
+  background-color: var(--mocha-base);
+  color: var(--mocha-text);
+}
+
+.pomodoro-menu {
+  min-width: 310px;
+}
+
+.todo-menu,
+.notes-menu {
+  min-width: 420px;
+  max-width: 520px;
+  padding: 12px;
+}
+
+/* Expanded task details share one row with category and action buttons. */
+.todo-menu {
+  min-width: 500px;
+  max-width: 600px;
+}
+
+.pomodoro-menu .header,
+.notes-menu .header-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pomodoro-menu .header {
+  color: var(--mocha-green);
+  background-color: var(--mocha-mantle);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.todo-menu .header,
+.notes-menu .notes-header {
+  background-color: var(--mocha-mantle);
+  border-bottom: 1px solid var(--mocha-surface0);
+  padding: 8px 4px;
+  margin-bottom: 8px;
+}
+
+.todo-menu .header {
+  padding: 8px 10px;
+}
+
+.notes-menu .header-title {
+  color: var(--mocha-peach);
+}
+
+.pomodoro-menu .status {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.pomodoro-menu .session,
+.todo-menu .description,
+.todo-menu .date-text,
+.todo-menu .category-text,
+.notes-menu .date {
+  color: var(--mocha-subtext0);
+}
+
+.todo-menu .date-text,
+.todo-menu .category-text,
+.notes-menu .date {
+  font-size: 10px;
+}
+
+.pomodoro-menu QPushButton,
+.todo-menu QPushButton,
+.notes-menu QPushButton {
+  background-color: var(--mocha-surface0);
+  color: var(--mocha-text);
+  border: 1px solid var(--mocha-surface1);
+  border-radius: 7px;
+  padding: 7px 10px;
+}
+
+.pomodoro-menu QPushButton:hover,
+.todo-menu QPushButton:hover,
+.notes-menu QPushButton:hover {
+  background-color: var(--mocha-surface1);
+  border-color: var(--mocha-surface2);
+}
+
+.pomodoro-menu QPushButton:pressed,
+.todo-menu QPushButton:pressed,
+.notes-menu QPushButton:pressed {
+  background-color: var(--mocha-surface2);
+}
+
+.pomodoro-menu .button.start {
+  background-color: var(--mocha-green);
+  border-color: var(--mocha-green);
+  color: var(--mocha-base);
+  font-weight: 600;
+}
+
+.pomodoro-menu .button.start:hover {
+  background-color: var(--mocha-teal);
+  border-color: var(--mocha-teal);
+}
+
+.pomodoro-menu .button.pause {
+  color: var(--mocha-peach);
+  border-color: var(--mocha-peach);
+}
+
+.pomodoro-menu .button.skip {
+  color: var(--mocha-blue);
+}
+
+.pomodoro-menu .session {
+  background-color: var(--mocha-mantle);
+  border-radius: 6px;
+  padding: 6px;
+}
+
+/* Keep status tabs joined; separate creation and sorting actions. */
+.todo-menu .header .add-task-button {
+  margin-right: 12px;
+}
+
+.todo-menu .tab-buttons {
+  margin: 0;
+  padding: 7px 10px;
+  border-radius: 0;
+}
+
+.todo-menu .tab-buttons.in-progress {
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+.todo-menu .tab-buttons.completed {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.todo-menu .tab-buttons.sort {
+  /* Qt stylesheets do not support display: none. */
+  min-width: 0;
+  max-width: 0;
+  min-height: 0;
+  max-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-size: 0;
+}
+
+.todo-menu .category-container {
+  padding: 8px 0;
+}
+
+.todo-menu .category-button {
+  margin: 0 3px;
+  padding: 6px 8px;
+}
+
+.todo-menu .buttons-container {
+  border-top: 1px solid var(--mocha-surface0);
+  padding: 12px 12px 14px;
+  margin-top: 8px;
+}
+
+.todo-menu .buttons-container .button.add {
+  margin-left: 8px;
+}
+
+.todo-menu .tab-buttons:checked,
+.todo-menu .category-button:checked {
+  background-color: var(--mocha-surface1);
+  border-color: var(--mocha-blue);
+  color: var(--mocha-blue);
+}
+
+.todo-menu .add-task-button,
+.todo-menu .button.add {
+  background-color: var(--mocha-blue);
+  border-color: var(--mocha-blue);
+  color: var(--mocha-base);
+  font-weight: 600;
+}
+
+.todo-menu .add-task-button:hover,
+.todo-menu .button.add:hover {
+  background-color: var(--mocha-lavender);
+  border-color: var(--mocha-lavender);
+}
+
+/* Enter submits notes and saves edits without a visible action button. */
+.notes-menu .add-button {
+  min-width: 0;
+  max-width: 0;
+  min-height: 0;
+  max-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-size: 0;
+}
+
+.todo-menu .task-item,
+.notes-menu .note-item {
+  background-color: var(--mocha-mantle);
+  border: 1px solid var(--mocha-surface0);
+  border-radius: 9px;
+}
+
+.todo-menu .task-item {
+  padding: 10px;
+  /* Keep both edges inset and allow for YASB's negative right viewport margin. */
+  margin: 4px 8px;
+}
+
+.notes-menu .note-item {
+  padding: 10px;
+  margin: 4px 0;
+}
+
+.todo-menu .task-item:hover {
+  background-color: var(--mocha-surface0);
+  border-color: var(--mocha-blue);
+}
+
+.notes-menu .note-item:hover {
+  background-color: var(--mocha-surface0);
+  border-color: var(--mocha-peach);
+}
+
+.todo-menu .task-item.expanded {
+  border-color: var(--mocha-blue);
+}
+
+.todo-menu .task-item.default {
+  border-left: 3px solid var(--mocha-red);
+}
+
+.todo-menu .task-item.school {
+  border-left: 3px solid var(--mocha-yellow);
+}
+
+.todo-menu .task-item.projects {
+  border-left: 3px solid var(--mocha-teal);
+}
+
+.todo-menu .task-item.completed .title,
+.todo-menu .task-item.completed .description {
+  color: var(--mocha-overlay1);
+}
+
+.todo-menu .title,
+.notes-menu .title {
+  font-weight: 600;
+  padding-bottom: 4px;
+}
+
+.todo-menu .task-info-row {
+  border-top: 1px solid var(--mocha-surface0);
+  margin-top: 8px;
+  padding-top: 6px;
+}
+
+.todo-menu .date-icon,
+.todo-menu .category-icon {
+  font-family: var(--font-icons);
+  font-size: 12px;
+  color: var(--mocha-blue);
+  min-width: 14px;
+  padding-right: 4px;
+}
+
+.todo-menu .date-text {
+  min-width: 70px;
+  margin-right: 12px;
+}
+
+.todo-menu .category-text {
+  min-width: 80px;
+  margin-right: 10px;
+}
+
+.todo-menu .edit-task-button,
+.todo-menu .delete-task-button {
+  font-size: 11px;
+  padding: 5px 7px;
+}
+
+.todo-menu .delete-task-button {
+  margin-left: 4px;
+}
+
+.todo-menu .task-checkbox {
+  font-family: var(--font-icons);
+  font-size: 18px;
+  color: var(--mocha-blue);
+  background-color: transparent;
+  border: none;
+  padding: 2px 8px 2px 0;
+}
+
+.todo-menu .task-checkbox:checked {
+  color: var(--mocha-green);
+}
+
+.todo-menu .scroll-widget,
+.notes-menu .scroll-area {
+  background-color: transparent;
+  border: none;
+}
+
+.todo-menu .title-field,
+.todo-menu .desc-field,
+.notes-menu .note-input {
+  background-color: var(--mocha-mantle);
+  color: var(--mocha-text);
+  border: 1px solid var(--mocha-surface1);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.todo-menu .title-field {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.todo-menu .title-field:focus,
+.todo-menu .desc-field:focus {
+  border-color: var(--mocha-blue);
+}
+
+.notes-menu .note-input:focus {
+  border-color: var(--mocha-peach);
+}
+
+.notes-menu .note-input {
+  min-height: 76px;
+}
+
+.todo-menu .no-tasks,
+.notes-menu .empty-list {
+  color: var(--mocha-subtext0);
+  padding: 20px 10px;
+}
+
+.todo-menu .no-tasks-icon {
+  font-family: var(--font-icons);
+  font-size: 28px;
+  color: var(--mocha-blue);
+  padding: 12px;
+}
+
+.todo-menu .context-menu {
+  background-color: var(--mocha-base);
+  color: var(--mocha-text);
+  border: 1px solid var(--mocha-surface1);
+  padding: 4px;
+}
+
+.todo-menu .context-menu::item {
+  padding: 7px 14px;
+  border-radius: 5px;
+}
+
+.todo-menu .context-menu::item:selected {
+  background-color: var(--mocha-surface1);
+  color: var(--mocha-blue);
+}
+
+/* Notes uses Fluent glyphs for its built-in menu actions. */
+.notes-menu .icon,
+.notes-menu .delete-button,
+.notes-menu .float-button,
+.notes-menu .close-button {
+  font-family: var(--font-fluent-icons);
+}
+
+.notes-menu .icon {
+  color: var(--mocha-peach);
+  font-size: 18px;
+  padding-right: 8px;
+}
+
+.notes-menu .copy-button,
+.notes-menu .delete-button,
+.notes-menu .float-button,
+.notes-menu .close-button {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--mocha-subtext0);
+  padding: 5px 7px;
+}
+
+/* Hide the copy action inside the note editor. */
+.notes-menu .input-copy-button {
+  min-width: 0;
+  max-width: 0;
+  min-height: 0;
+  max-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-size: 0;
+}
+
+.notes-menu .copy-button {
+  font-family: var(--font-icons);
+  font-size: 14px;
+}
+
+.notes-menu .copy-button:hover,
+.notes-menu .float-button:hover {
+  color: var(--mocha-peach);
+}
+
+.notes-menu .close-button:hover,
+.notes-menu .delete-button:hover,
+.todo-menu .delete-task-button:hover {
+  color: var(--mocha-red);
+}
+
+/***---------------------------------      Audio Menu        ----------------------------------***/
 .audio-menu {
   background-color: var(--mocha-base);
   min-width: 330px;
@@ -239,7 +800,7 @@
   border-radius: 8px;
 }
 
-/* Network menus */
+/***---------------------------      Wi-Fi and Bluetooth Menus      ----------------------------***/
 .wifi-menu,
 .bluetooth-menu {
   background-color: var(--mocha-base);
@@ -306,7 +867,7 @@
 .bluetooth-menu .icon,
 .bluetooth-menu .battery-icon,
 .bluetooth-menu .scan-icon {
-  font-family: var(--font-icons);
+  font-family: var(--font-fluent-icons);
   color: var(--mocha-blue);
 }
 
@@ -392,30 +953,42 @@
   color: var(--mocha-blue);
 }
 
-/* Compact scrollbars for device and network lists. */
-.bluetooth-menu QScrollBar:vertical {
+/* Compact scrollbars for device, task and note lists. */
+.bluetooth-menu QScrollBar:vertical,
+.todo-menu QScrollBar:vertical,
+.notes-menu QScrollBar:vertical {
   background-color: transparent;
   width: 6px;
   margin: 4px 0;
 }
 
-.bluetooth-menu QScrollBar::handle:vertical {
+.bluetooth-menu QScrollBar::handle:vertical,
+.todo-menu QScrollBar::handle:vertical,
+.notes-menu QScrollBar::handle:vertical {
   background-color: var(--mocha-surface2);
   min-height: 24px;
   border-radius: 3px;
 }
 
 .bluetooth-menu QScrollBar::add-line:vertical,
-.bluetooth-menu QScrollBar::sub-line:vertical {
+.bluetooth-menu QScrollBar::sub-line:vertical,
+.todo-menu QScrollBar::add-line:vertical,
+.todo-menu QScrollBar::sub-line:vertical,
+.notes-menu QScrollBar::add-line:vertical,
+.notes-menu QScrollBar::sub-line:vertical {
   height: 0;
 }
 
 .bluetooth-menu QScrollBar::add-page:vertical,
-.bluetooth-menu QScrollBar::sub-page:vertical {
+.bluetooth-menu QScrollBar::sub-page:vertical,
+.todo-menu QScrollBar::add-page:vertical,
+.todo-menu QScrollBar::sub-page:vertical,
+.notes-menu QScrollBar::add-page:vertical,
+.notes-menu QScrollBar::sub-page:vertical {
   background-color: transparent;
 }
 
-/* Power Menu */
+/***---------------------------------      Power Menu        ----------------------------------***/
 .power-menu-overlay {
   background-color: rgba(17, 17, 27, 0.88);
 }
@@ -430,7 +1003,7 @@
 }
 
 .power-menu-popup .button .icon {
-  font-family: var(--font-nerd-icons);
+  font-family: var(--font-icons);
   font-size: 22px;
   font-weight: normal;
   color: var(--mocha-mauve);
