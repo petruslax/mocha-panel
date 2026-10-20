@@ -23,7 +23,7 @@ The project contains my own widget selection, layout, and styling. It uses the C
 
 ## Credits
 
-- Color palette: [Catppuccin Mocha](https://catppuccin.com/palette/)
+- Color palette: [Catppuccin Mocha](https://catppuccin.com/palette/) ([MIT license](catppuccin-LICENSE.txt))
 - Runs with [YASB](https://github.com/amnweb/yasb)
 
 ## License
