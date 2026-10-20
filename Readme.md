@@ -25,3 +25,7 @@ The project contains my own widget selection, layout, and styling. It uses the C
 
 - Color palette: [Catppuccin Mocha](https://catppuccin.com/palette/)
 - Runs with [YASB](https://github.com/amnweb/yasb)
+
+## License
+
+This theme is licensed under the [MIT License](LICENSE).
